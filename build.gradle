@@ -3,12 +3,13 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         gradlePluginPortal()
     }
     dependencies {
         classpath BuildPlugins.androidGradlePlugin
         classpath BuildPlugins.kotlinGradlePlugin
+        classpath BuildPlugins.hiltAndroidPlugin
 
         classpath BuildPlugins.versionsPlugin
         classpath BuildPlugins.detektPlugin
@@ -20,11 +21,12 @@ buildscript {
 subprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     apply plugin: BuildPlugins.versions
     apply plugin: BuildPlugins.ktlint
     apply plugin: BuildPlugins.detekt
+    apply plugin: BuildPlugins.canidropjetifier
 }
 
 allprojects {

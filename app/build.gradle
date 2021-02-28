@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion AndroidSdk.compile
@@ -24,17 +26,30 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
     }
     buildFeatures.viewBinding = true
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
     implementation Libraries.kotlinStdLib
     implementation Libraries.appCompat
+    implementation Libraries.ktxActivity
     implementation Libraries.material
     implementation Libraries.constraintLayout
+    implementation Libraries.lifecycleViewmodel
+    implementation Libraries.lifecycleLivedata
+    implementation Libraries.hilt
+    implementation Libraries.hiltLifecycleViewmodel
+    kapt Libraries.hiltAndroidCompiler
+    kapt Libraries.hiltCompiler
 
     testImplementation Libraries.junit
+    testImplementation Libraries.mockk
+    testImplementation Libraries.coroutinesTest
 }
 
 detekt {
